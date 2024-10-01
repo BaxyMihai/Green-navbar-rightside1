@@ -1,0 +1,120 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f7ecec;
+  --navBg: #1e1e1e;
+  --green: #56d453;
+  --ease-out: cubic-bezier(0, 0.55, 0.55, 1);
+  --ease-in: cubic-bezier(0.55, 0.01, 1, 1);
+}
+
+.container {
+  min-height: 100vh;
+  display: grid;
+  justify-content: end;
+  align-items: center;
+  font-family: sans-serif;
+  background-color: var(--bg);
+}
+
+.navbar {
+  border-radius: 1rem 0 0 1rem;
+  width: 100px; /* Adjust as needed */
+  height: 600px; /* Fixed height for navbar */
+  padding: 3rem 0; /* Remove padding for a tighter layout */
+  margin-right: 10px; /* Space between navbar and other content */
+  box-sizing: border-box; /* Include padding in width calculations */
+  display: flex; /* Use flexbox layout */
+  flex-direction: column; /* Stack icons vertically */
+  align-items: center; /* Center icons horizontally */
+  justify-content: flex-start; /* Center items vertically */
+  background-color: var(--navBg); /* Background color */
+  position: relative;
+  z-index: 0;
+}
+
+.navbar__item {
+  padding: 1.4rem 0;
+  display: flex; /* Use flexbox for each item */
+  flex-direction: column; /* Stack icon and text */
+  align-items: center; /* Center icon and text horizontally */
+  writing-mode: vertical-lr; /* Vertical writting */
+  justify-content: center; /* Center content vertically within each item */
+  height: 100%; /* Set a fixed height for each item */
+  width: 80px; /* Full width of the navbar item */
+}
+
+.icon {
+  width: 3.5rem;
+  height: 3, 5rem;
+  stroke: white;
+  fill: transparent;
+  stroke-linecap: round; /* Make icons corners round*/
+  stroke-linejoin: round; /* Make icons corners round*/
+  stroke-dasharray: 400; /* Make icons corners round*/
+  stroke-miterlimit: 10; /* Make icons corners round*/
+  cursor: pointer;
+  z-index: 2; /* Send it in front the text */
+}
+
+.icon.active {
+  opacity: 0;
+  stroke: black;
+  stroke-width: 1.5px;
+  transform: translatex(
+    -90%
+  ); /* the position of the icons  after transformation */
+  animation: fade 0.5s var(--ease-out) 0.3s forwards,
+    stroke 0.5s var(--ease-out) 0.3s reverse; /* The animation befour and after */
+}
+
+@keyframes fade {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 400;
+  }
+}
+
+.navbar__item span {
+  color: white;
+  text-transform: capitalize;
+  margin-top: 5px; /* Space between icon and text */
+  text-align: center; /* Center align text under the icon */
+  position: relative;
+}
+
+.navbar__item span::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--navBg); /* The secound color of the icons */
+  position: absolute; /* The position of the icons after they are selected */
+  top: 0;
+  left: 0;
+  z-index: -1; /* Send it behind the text */
+}
+
+#indicator {
+  width: 100px;
+  height: 100px;
+  background-color: var(--green); /* The color of the indicator */
+  border-radius: 50%; /* To make the indicator round */
+  position: absolute; /* For the green dot to stay in the nav bar */
+  top: 45px; /* Start at the top */
+  right: 0.6rem; /* Position on the right */
+  transform: translate(-50%, 0); /* Adjust as needed */
+  z-index: 1; /* Keep it above other elements */
+  border: 0.5rem solid var(--bg); /* The gap */
+  transition: transform 0.3s var(--ease-out); /* Transition animation with a variable set and timing */
+}
